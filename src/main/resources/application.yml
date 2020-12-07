@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8081
 
 spring:
   datasource:
@@ -13,10 +13,10 @@ mybatis:
   mapper-locations: classpath:mappers/*Mapper.xml
   type-aliases-package: com.lzw.meblog.model
 
-##showSql
-#logging:
-#  level:
-#    com:
-#      lzw:
-#        meblog:
-#          mapper : debug
+#showSql
+logging:
+  level:
+    com:
+      lzw:
+        meblog:
+          mapper : debug

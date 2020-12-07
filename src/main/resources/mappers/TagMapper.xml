@@ -1,40 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.lzw.meblog.mapper.ArticleMapper">
-  <resultMap id="BaseResultMap" type="com.lzw.meblog.model.Article">
+<mapper namespace="com.lzw.meblog.mapper.TagMapper">
+  <resultMap id="BaseResultMap" type="com.lzw.meblog.model.Tag">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="title" jdbcType="VARCHAR" property="title" />
-    <result column="summary" jdbcType="VARCHAR" property="summary" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
     <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, title, summary, gmt_create, gmt_modified
+    id, `name`, gmt_create, gmt_modified
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from article
+    from tag
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from article
+    delete from tag
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.lzw.meblog.model.Article" useGeneratedKeys="true">
-    insert into article (title, summary, gmt_create, 
-      gmt_modified)
-    values (#{title,jdbcType=VARCHAR}, #{summary,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, 
-      #{gmtModified,jdbcType=TIMESTAMP})
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.lzw.meblog.model.Tag" useGeneratedKeys="true">
+    insert into tag (`name`, gmt_create, gmt_modified
+      )
+    values (#{name,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}
+      )
   </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.lzw.meblog.model.Article" useGeneratedKeys="true">
-    insert into article
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.lzw.meblog.model.Tag" useGeneratedKeys="true">
+    insert into tag
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="title != null">
-        title,
-      </if>
-      <if test="summary != null">
-        summary,
+      <if test="name != null">
+        `name`,
       </if>
       <if test="gmtCreate != null">
         gmt_create,
@@ -44,11 +40,8 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="title != null">
-        #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="summary != null">
-        #{summary,jdbcType=VARCHAR},
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
       </if>
       <if test="gmtCreate != null">
         #{gmtCreate,jdbcType=TIMESTAMP},
@@ -58,14 +51,11 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.lzw.meblog.model.Article">
-    update article
+  <update id="updateByPrimaryKeySelective" parameterType="com.lzw.meblog.model.Tag">
+    update tag
     <set>
-      <if test="title != null">
-        title = #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="summary != null">
-        summary = #{summary,jdbcType=VARCHAR},
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
       </if>
       <if test="gmtCreate != null">
         gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
@@ -76,10 +66,9 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.lzw.meblog.model.Article">
-    update article
-    set title = #{title,jdbcType=VARCHAR},
-      summary = #{summary,jdbcType=VARCHAR},
+  <update id="updateByPrimaryKey" parameterType="com.lzw.meblog.model.Tag">
+    update tag
+    set `name` = #{name,jdbcType=VARCHAR},
       gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
       gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}

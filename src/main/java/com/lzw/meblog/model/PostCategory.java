@@ -7,29 +7,29 @@ import java.time.LocalDateTime;
  * @author 
  * 
  */
-public class Article implements Serializable {
+public class PostCategory implements Serializable {
     /**
      * 主键
      */
     private Integer id;
 
     /**
-     * 文章标题
+     * 对应的文章id
      */
-    private String title;
+    private Integer postId;
 
     /**
-     * 文章摘要，简要介绍
+     * 对应的分类id
      */
-    private String summary;
+    private Integer categoryId;
 
     /**
-     * 文章创建时间
+     * 创建时间
      */
     private LocalDateTime gmtCreate;
 
     /**
-     * 文章修改时间
+     * 修改时间
      */
     private LocalDateTime gmtModified;
 
@@ -43,20 +43,20 @@ public class Article implements Serializable {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public Integer getPostId() {
+        return postId;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setPostId(Integer postId) {
+        this.postId = postId;
     }
 
-    public String getSummary() {
-        return summary;
+    public Integer getCategoryId() {
+        return categoryId;
     }
 
-    public void setSummary(String summary) {
-        this.summary = summary;
+    public void setCategoryId(Integer categoryId) {
+        this.categoryId = categoryId;
     }
 
     public LocalDateTime getGmtCreate() {
@@ -86,10 +86,10 @@ public class Article implements Serializable {
         if (getClass() != that.getClass()) {
             return false;
         }
-        Article other = (Article) that;
+        PostCategory other = (PostCategory) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getTitle() == null ? other.getTitle() == null : this.getTitle().equals(other.getTitle()))
-            && (this.getSummary() == null ? other.getSummary() == null : this.getSummary().equals(other.getSummary()))
+            && (this.getPostId() == null ? other.getPostId() == null : this.getPostId().equals(other.getPostId()))
+            && (this.getCategoryId() == null ? other.getCategoryId() == null : this.getCategoryId().equals(other.getCategoryId()))
             && (this.getGmtCreate() == null ? other.getGmtCreate() == null : this.getGmtCreate().equals(other.getGmtCreate()))
             && (this.getGmtModified() == null ? other.getGmtModified() == null : this.getGmtModified().equals(other.getGmtModified()));
     }
@@ -99,8 +99,8 @@ public class Article implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-        result = prime * result + ((getTitle() == null) ? 0 : getTitle().hashCode());
-        result = prime * result + ((getSummary() == null) ? 0 : getSummary().hashCode());
+        result = prime * result + ((getPostId() == null) ? 0 : getPostId().hashCode());
+        result = prime * result + ((getCategoryId() == null) ? 0 : getCategoryId().hashCode());
         result = prime * result + ((getGmtCreate() == null) ? 0 : getGmtCreate().hashCode());
         result = prime * result + ((getGmtModified() == null) ? 0 : getGmtModified().hashCode());
         return result;
@@ -113,8 +113,8 @@ public class Article implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", title=").append(title);
-        sb.append(", summary=").append(summary);
+        sb.append(", postId=").append(postId);
+        sb.append(", categoryId=").append(categoryId);
         sb.append(", gmtCreate=").append(gmtCreate);
         sb.append(", gmtModified=").append(gmtModified);
         sb.append(", serialVersionUID=").append(serialVersionUID);

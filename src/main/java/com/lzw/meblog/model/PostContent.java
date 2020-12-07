@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
  * @author 
  * 
  */
-public class ArticleContent implements Serializable {
+public class PostContent implements Serializable {
     /**
      * 主键
      */
@@ -26,7 +26,7 @@ public class ArticleContent implements Serializable {
     /**
      * 对应文章的id
      */
-    private Integer articleId;
+    private Integer postId;
 
     /**
      * 文章内容
@@ -59,12 +59,12 @@ public class ArticleContent implements Serializable {
         this.gmtModified = gmtModified;
     }
 
-    public Integer getArticleId() {
-        return articleId;
+    public Integer getPostId() {
+        return postId;
     }
 
-    public void setArticleId(Integer articleId) {
-        this.articleId = articleId;
+    public void setPostId(Integer postId) {
+        this.postId = postId;
     }
 
     public String getContent() {
@@ -86,11 +86,11 @@ public class ArticleContent implements Serializable {
         if (getClass() != that.getClass()) {
             return false;
         }
-        ArticleContent other = (ArticleContent) that;
+        PostContent other = (PostContent) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getGmtCreate() == null ? other.getGmtCreate() == null : this.getGmtCreate().equals(other.getGmtCreate()))
             && (this.getGmtModified() == null ? other.getGmtModified() == null : this.getGmtModified().equals(other.getGmtModified()))
-            && (this.getArticleId() == null ? other.getArticleId() == null : this.getArticleId().equals(other.getArticleId()))
+            && (this.getPostId() == null ? other.getPostId() == null : this.getPostId().equals(other.getPostId()))
             && (this.getContent() == null ? other.getContent() == null : this.getContent().equals(other.getContent()));
     }
 
@@ -101,7 +101,7 @@ public class ArticleContent implements Serializable {
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getGmtCreate() == null) ? 0 : getGmtCreate().hashCode());
         result = prime * result + ((getGmtModified() == null) ? 0 : getGmtModified().hashCode());
-        result = prime * result + ((getArticleId() == null) ? 0 : getArticleId().hashCode());
+        result = prime * result + ((getPostId() == null) ? 0 : getPostId().hashCode());
         result = prime * result + ((getContent() == null) ? 0 : getContent().hashCode());
         return result;
     }
@@ -115,7 +115,7 @@ public class ArticleContent implements Serializable {
         sb.append(", id=").append(id);
         sb.append(", gmtCreate=").append(gmtCreate);
         sb.append(", gmtModified=").append(gmtModified);
-        sb.append(", articleId=").append(articleId);
+        sb.append(", postId=").append(postId);
         sb.append(", content=").append(content);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");

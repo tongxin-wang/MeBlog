@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.lzw.meblog.mapper.ArticleCategoryMapper">
-  <resultMap id="BaseResultMap" type="com.lzw.meblog.model.ArticleCategory">
+<mapper namespace="com.lzw.meblog.mapper.PostCategoryMapper">
+  <resultMap id="BaseResultMap" type="com.lzw.meblog.model.PostCategory">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="article_id" jdbcType="INTEGER" property="articleId" />
+    <result column="post_id" jdbcType="INTEGER" property="postId" />
     <result column="category_id" jdbcType="INTEGER" property="categoryId" />
     <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
     <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, article_id, category_id, gmt_create, gmt_modified
+    id, post_id, category_id, gmt_create, gmt_modified
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from article_category
+    from post_category
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from article_category
+    delete from post_category
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.lzw.meblog.model.ArticleCategory" useGeneratedKeys="true">
-    insert into article_category (article_id, category_id, gmt_create, 
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.lzw.meblog.model.PostCategory" useGeneratedKeys="true">
+    insert into post_category (post_id, category_id, gmt_create, 
       gmt_modified)
-    values (#{articleId,jdbcType=INTEGER}, #{categoryId,jdbcType=INTEGER}, #{gmtCreate,jdbcType=TIMESTAMP}, 
+    values (#{postId,jdbcType=INTEGER}, #{categoryId,jdbcType=INTEGER}, #{gmtCreate,jdbcType=TIMESTAMP}, 
       #{gmtModified,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.lzw.meblog.model.ArticleCategory" useGeneratedKeys="true">
-    insert into article_category
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.lzw.meblog.model.PostCategory" useGeneratedKeys="true">
+    insert into post_category
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="articleId != null">
-        article_id,
+      <if test="postId != null">
+        post_id,
       </if>
       <if test="categoryId != null">
         category_id,
@@ -44,8 +44,8 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="articleId != null">
-        #{articleId,jdbcType=INTEGER},
+      <if test="postId != null">
+        #{postId,jdbcType=INTEGER},
       </if>
       <if test="categoryId != null">
         #{categoryId,jdbcType=INTEGER},
@@ -58,11 +58,11 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.lzw.meblog.model.ArticleCategory">
-    update article_category
+  <update id="updateByPrimaryKeySelective" parameterType="com.lzw.meblog.model.PostCategory">
+    update post_category
     <set>
-      <if test="articleId != null">
-        article_id = #{articleId,jdbcType=INTEGER},
+      <if test="postId != null">
+        post_id = #{postId,jdbcType=INTEGER},
       </if>
       <if test="categoryId != null">
         category_id = #{categoryId,jdbcType=INTEGER},
@@ -76,9 +76,9 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.lzw.meblog.model.ArticleCategory">
-    update article_category
-    set article_id = #{articleId,jdbcType=INTEGER},
+  <update id="updateByPrimaryKey" parameterType="com.lzw.meblog.model.PostCategory">
+    update post_category
+    set post_id = #{postId,jdbcType=INTEGER},
       category_id = #{categoryId,jdbcType=INTEGER},
       gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
       gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}

@@ -7,24 +7,34 @@ import java.time.LocalDateTime;
  * @author 
  * 
  */
-public class Label implements Serializable {
+public class Post implements Serializable {
     /**
      * 主键
      */
     private Integer id;
 
     /**
-     * 分类名称
+     * 文章标题
      */
-    private String name;
+    private String title;
 
     /**
-     * 创建时间
+     * 文章摘要，简要介绍
+     */
+    private String summary;
+
+    /**
+     * 文章题图
+     */
+    private String imgUrl;
+
+    /**
+     * 文章创建时间
      */
     private LocalDateTime gmtCreate;
 
     /**
-     * 修改时间
+     * 文章修改时间
      */
     private LocalDateTime gmtModified;
 
@@ -38,12 +48,28 @@ public class Label implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getSummary() {
+        return summary;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 
     public LocalDateTime getGmtCreate() {
@@ -73,9 +99,11 @@ public class Label implements Serializable {
         if (getClass() != that.getClass()) {
             return false;
         }
-        Label other = (Label) that;
+        Post other = (Post) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
+            && (this.getTitle() == null ? other.getTitle() == null : this.getTitle().equals(other.getTitle()))
+            && (this.getSummary() == null ? other.getSummary() == null : this.getSummary().equals(other.getSummary()))
+            && (this.getImgUrl() == null ? other.getImgUrl() == null : this.getImgUrl().equals(other.getImgUrl()))
             && (this.getGmtCreate() == null ? other.getGmtCreate() == null : this.getGmtCreate().equals(other.getGmtCreate()))
             && (this.getGmtModified() == null ? other.getGmtModified() == null : this.getGmtModified().equals(other.getGmtModified()));
     }
@@ -85,7 +113,9 @@ public class Label implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-        result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
+        result = prime * result + ((getTitle() == null) ? 0 : getTitle().hashCode());
+        result = prime * result + ((getSummary() == null) ? 0 : getSummary().hashCode());
+        result = prime * result + ((getImgUrl() == null) ? 0 : getImgUrl().hashCode());
         result = prime * result + ((getGmtCreate() == null) ? 0 : getGmtCreate().hashCode());
         result = prime * result + ((getGmtModified() == null) ? 0 : getGmtModified().hashCode());
         return result;
@@ -98,7 +128,9 @@ public class Label implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", name=").append(name);
+        sb.append(", title=").append(title);
+        sb.append(", summary=").append(summary);
+        sb.append(", imgUrl=").append(imgUrl);
         sb.append(", gmtCreate=").append(gmtCreate);
         sb.append(", gmtModified=").append(gmtModified);
         sb.append(", serialVersionUID=").append(serialVersionUID);

@@ -36,7 +36,7 @@ public class Comment implements Serializable {
     /**
      * 对应文章的id
      */
-    private Integer articleId;
+    private Integer postId;
 
     private static final long serialVersionUID = 1L;
 
@@ -80,12 +80,12 @@ public class Comment implements Serializable {
         this.gmtModified = gmtModified;
     }
 
-    public Integer getArticleId() {
-        return articleId;
+    public Integer getPostId() {
+        return postId;
     }
 
-    public void setArticleId(Integer articleId) {
-        this.articleId = articleId;
+    public void setPostId(Integer postId) {
+        this.postId = postId;
     }
 
     @Override
@@ -105,7 +105,7 @@ public class Comment implements Serializable {
             && (this.getContent() == null ? other.getContent() == null : this.getContent().equals(other.getContent()))
             && (this.getGmtCreate() == null ? other.getGmtCreate() == null : this.getGmtCreate().equals(other.getGmtCreate()))
             && (this.getGmtModified() == null ? other.getGmtModified() == null : this.getGmtModified().equals(other.getGmtModified()))
-            && (this.getArticleId() == null ? other.getArticleId() == null : this.getArticleId().equals(other.getArticleId()));
+            && (this.getPostId() == null ? other.getPostId() == null : this.getPostId().equals(other.getPostId()));
     }
 
     @Override
@@ -117,7 +117,7 @@ public class Comment implements Serializable {
         result = prime * result + ((getContent() == null) ? 0 : getContent().hashCode());
         result = prime * result + ((getGmtCreate() == null) ? 0 : getGmtCreate().hashCode());
         result = prime * result + ((getGmtModified() == null) ? 0 : getGmtModified().hashCode());
-        result = prime * result + ((getArticleId() == null) ? 0 : getArticleId().hashCode());
+        result = prime * result + ((getPostId() == null) ? 0 : getPostId().hashCode());
         return result;
     }
 
@@ -132,7 +132,7 @@ public class Comment implements Serializable {
         sb.append(", content=").append(content);
         sb.append(", gmtCreate=").append(gmtCreate);
         sb.append(", gmtModified=").append(gmtModified);
-        sb.append(", articleId=").append(articleId);
+        sb.append(", postId=").append(postId);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

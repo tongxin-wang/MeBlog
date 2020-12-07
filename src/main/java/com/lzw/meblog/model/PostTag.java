@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
  * @author 
  * 
  */
-public class ArticleLabel implements Serializable {
+public class PostTag implements Serializable {
     /**
      * 主键
      */
@@ -16,12 +16,12 @@ public class ArticleLabel implements Serializable {
     /**
      * 对应的文章id
      */
-    private Integer articleId;
+    private Integer postId;
 
     /**
      * 对应的标签id
      */
-    private Integer labelId;
+    private Integer tagId;
 
     /**
      * 创建时间
@@ -43,20 +43,20 @@ public class ArticleLabel implements Serializable {
         this.id = id;
     }
 
-    public Integer getArticleId() {
-        return articleId;
+    public Integer getPostId() {
+        return postId;
     }
 
-    public void setArticleId(Integer articleId) {
-        this.articleId = articleId;
+    public void setPostId(Integer postId) {
+        this.postId = postId;
     }
 
-    public Integer getLabelId() {
-        return labelId;
+    public Integer getTagId() {
+        return tagId;
     }
 
-    public void setLabelId(Integer labelId) {
-        this.labelId = labelId;
+    public void setTagId(Integer tagId) {
+        this.tagId = tagId;
     }
 
     public LocalDateTime getGmtCreate() {
@@ -86,10 +86,10 @@ public class ArticleLabel implements Serializable {
         if (getClass() != that.getClass()) {
             return false;
         }
-        ArticleLabel other = (ArticleLabel) that;
+        PostTag other = (PostTag) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getArticleId() == null ? other.getArticleId() == null : this.getArticleId().equals(other.getArticleId()))
-            && (this.getLabelId() == null ? other.getLabelId() == null : this.getLabelId().equals(other.getLabelId()))
+            && (this.getPostId() == null ? other.getPostId() == null : this.getPostId().equals(other.getPostId()))
+            && (this.getTagId() == null ? other.getTagId() == null : this.getTagId().equals(other.getTagId()))
             && (this.getGmtCreate() == null ? other.getGmtCreate() == null : this.getGmtCreate().equals(other.getGmtCreate()))
             && (this.getGmtModified() == null ? other.getGmtModified() == null : this.getGmtModified().equals(other.getGmtModified()));
     }
@@ -99,8 +99,8 @@ public class ArticleLabel implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-        result = prime * result + ((getArticleId() == null) ? 0 : getArticleId().hashCode());
-        result = prime * result + ((getLabelId() == null) ? 0 : getLabelId().hashCode());
+        result = prime * result + ((getPostId() == null) ? 0 : getPostId().hashCode());
+        result = prime * result + ((getTagId() == null) ? 0 : getTagId().hashCode());
         result = prime * result + ((getGmtCreate() == null) ? 0 : getGmtCreate().hashCode());
         result = prime * result + ((getGmtModified() == null) ? 0 : getGmtModified().hashCode());
         return result;
@@ -113,8 +113,8 @@ public class ArticleLabel implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", articleId=").append(articleId);
-        sb.append(", labelId=").append(labelId);
+        sb.append(", postId=").append(postId);
+        sb.append(", tagId=").append(tagId);
         sb.append(", gmtCreate=").append(gmtCreate);
         sb.append(", gmtModified=").append(gmtModified);
         sb.append(", serialVersionUID=").append(serialVersionUID);

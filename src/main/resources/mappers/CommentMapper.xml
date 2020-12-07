@@ -7,10 +7,10 @@
     <result column="content" jdbcType="VARCHAR" property="content" />
     <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
     <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
-    <result column="article_id" jdbcType="INTEGER" property="articleId" />
+    <result column="post_id" jdbcType="INTEGER" property="postId" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, nickname, content, gmt_create, gmt_modified, article_id
+    id, nickname, content, gmt_create, gmt_modified, post_id
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -24,9 +24,9 @@
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.lzw.meblog.model.Comment" useGeneratedKeys="true">
     insert into comment (nickname, content, gmt_create, 
-      gmt_modified, article_id)
+      gmt_modified, post_id)
     values (#{nickname,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, 
-      #{gmtModified,jdbcType=TIMESTAMP}, #{articleId,jdbcType=INTEGER})
+      #{gmtModified,jdbcType=TIMESTAMP}, #{postId,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.lzw.meblog.model.Comment" useGeneratedKeys="true">
     insert into comment
@@ -43,8 +43,8 @@
       <if test="gmtModified != null">
         gmt_modified,
       </if>
-      <if test="articleId != null">
-        article_id,
+      <if test="postId != null">
+        post_id,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -60,8 +60,8 @@
       <if test="gmtModified != null">
         #{gmtModified,jdbcType=TIMESTAMP},
       </if>
-      <if test="articleId != null">
-        #{articleId,jdbcType=INTEGER},
+      <if test="postId != null">
+        #{postId,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -80,8 +80,8 @@
       <if test="gmtModified != null">
         gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
       </if>
-      <if test="articleId != null">
-        article_id = #{articleId,jdbcType=INTEGER},
+      <if test="postId != null">
+        post_id = #{postId,jdbcType=INTEGER},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -92,7 +92,7 @@
       content = #{content,jdbcType=VARCHAR},
       gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
       gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
-      article_id = #{articleId,jdbcType=INTEGER}
+      post_id = #{postId,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

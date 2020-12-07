@@ -7,21 +7,16 @@ import java.time.LocalDateTime;
  * @author 
  * 
  */
-public class ArticleCategory implements Serializable {
+public class Tag implements Serializable {
     /**
      * 主键
      */
     private Integer id;
 
     /**
-     * 对应的文章id
+     * 分类名称
      */
-    private Integer articleId;
-
-    /**
-     * 对应的分类id
-     */
-    private Integer categoryId;
+    private String name;
 
     /**
      * 创建时间
@@ -43,20 +38,12 @@ public class ArticleCategory implements Serializable {
         this.id = id;
     }
 
-    public Integer getArticleId() {
-        return articleId;
+    public String getName() {
+        return name;
     }
 
-    public void setArticleId(Integer articleId) {
-        this.articleId = articleId;
-    }
-
-    public Integer getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(Integer categoryId) {
-        this.categoryId = categoryId;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public LocalDateTime getGmtCreate() {
@@ -86,10 +73,9 @@ public class ArticleCategory implements Serializable {
         if (getClass() != that.getClass()) {
             return false;
         }
-        ArticleCategory other = (ArticleCategory) that;
+        Tag other = (Tag) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getArticleId() == null ? other.getArticleId() == null : this.getArticleId().equals(other.getArticleId()))
-            && (this.getCategoryId() == null ? other.getCategoryId() == null : this.getCategoryId().equals(other.getCategoryId()))
+            && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
             && (this.getGmtCreate() == null ? other.getGmtCreate() == null : this.getGmtCreate().equals(other.getGmtCreate()))
             && (this.getGmtModified() == null ? other.getGmtModified() == null : this.getGmtModified().equals(other.getGmtModified()));
     }
@@ -99,8 +85,7 @@ public class ArticleCategory implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-        result = prime * result + ((getArticleId() == null) ? 0 : getArticleId().hashCode());
-        result = prime * result + ((getCategoryId() == null) ? 0 : getCategoryId().hashCode());
+        result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
         result = prime * result + ((getGmtCreate() == null) ? 0 : getGmtCreate().hashCode());
         result = prime * result + ((getGmtModified() == null) ? 0 : getGmtModified().hashCode());
         return result;
@@ -113,8 +98,7 @@ public class ArticleCategory implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", articleId=").append(articleId);
-        sb.append(", categoryId=").append(categoryId);
+        sb.append(", name=").append(name);
         sb.append(", gmtCreate=").append(gmtCreate);
         sb.append(", gmtModified=").append(gmtModified);
         sb.append(", serialVersionUID=").append(serialVersionUID);
