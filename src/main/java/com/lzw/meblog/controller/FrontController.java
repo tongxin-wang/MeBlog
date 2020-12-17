@@ -1,8 +1,6 @@
 package com.lzw.meblog.controller;
 
 import com.lzw.meblog.dto.*;
-import com.lzw.meblog.model.Post;
-import com.lzw.meblog.model.Tag;
 import com.lzw.meblog.service.CategoryService;
 import com.lzw.meblog.service.PostService;
 import com.lzw.meblog.service.TagService;
@@ -12,7 +10,6 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
