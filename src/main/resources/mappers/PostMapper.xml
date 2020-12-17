@@ -9,6 +9,13 @@
     <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
     <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
   </resultMap>
+  <resultMap id="postResultMap" type="com.lzw.meblog.dto.PostDto">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="summary" jdbcType="VARCHAR" property="summary" />
+    <result column="img_url" jdbcType="VARCHAR" property="imgUrl" />
+    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+  </resultMap>
   <sql id="Base_Column_List">
     id, title, summary, img_url, gmt_create, gmt_modified
   </sql>
@@ -95,7 +102,12 @@
       gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="getAllPosts" resultType="com.lzw.meblog.model.Post" resultMap="BaseResultMap">
-    select * from post
+  <select id="getDetailedPostById" parameterType="java.lang.Integer" resultMap="postResultMap">
+    select id, title, summary, img_url, gmt_create
+    from post
+    where id = #{id}
+  </select>
+  <select id="getAllPosts" resultMap="postResultMap">
+    select id, title, summary, img_url, gmt_create from post
   </select>
 </mapper>

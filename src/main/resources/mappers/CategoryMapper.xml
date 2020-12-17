@@ -7,6 +7,22 @@
     <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
     <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
   </resultMap>
+  <resultMap id="categoryResultMap" type="com.lzw.meblog.dto.CategoryDto">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+  </resultMap>
+  <resultMap id="postResultMap" type="com.lzw.meblog.dto.PostDto">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="summary" jdbcType="VARCHAR" property="summary" />
+    <result column="img_url" jdbcType="VARCHAR" property="imgUrl" />
+    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+  </resultMap>
+  <resultMap id="categoryPostsResultMap" type="com.lzw.meblog.dto.CategoryPostsDto">
+    <id column="category_id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <collection property="posts" ofType="com.lzw.meblog.dto.PostDto" resultMap="postResultMap" columnPrefix="post_"/>
+  </resultMap>
   <sql id="Base_Column_List">
     id, `name`, gmt_create, gmt_modified
   </sql>
@@ -73,4 +89,21 @@
       gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="getAllCategories" resultMap="categoryResultMap">
+    select id, `name` from category
+  </select>
+  <select id="getPostsByCategoryId" resultMap="categoryPostsResultMap">
+    select
+      category.id as category_id,
+      `name`,
+      post.id as post_id,
+      post.title as post_title,
+      post.summary as post_summary,
+      post.img_url as post_img_url,
+      post.gmt_create as post_gmt_create
+    from category
+      left outer join post_category on category.id = post_category.category_id
+      left outer join post on post_category.post_id = post.id
+    where category.id = #{id}
+  </select>
 </mapper>
