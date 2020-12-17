@@ -31,7 +31,7 @@ public class Swagger2 {
 
     private ApiInfo apiInfo(){
         return new ApiInfoBuilder()
-                .title("MeBlog项目RESTful APIs")
+                .title("MeBlog项目RESTful API")
                 .contact("@TongxinWang")
                 .version("1.0")
                 .build();

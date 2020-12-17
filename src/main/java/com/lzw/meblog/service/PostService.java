@@ -1,7 +1,8 @@
 package com.lzw.meblog.service;
 
+import com.lzw.meblog.dto.DetailedPostDto;
+import com.lzw.meblog.dto.PostDto;
 import com.lzw.meblog.mapper.PostMapper;
-import com.lzw.meblog.model.Post;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,11 +13,11 @@ public class PostService {
     @Autowired
     private PostMapper postMapper;
 
-    public Post getPostById(int id){
-        return postMapper.selectByPrimaryKey(id);
+    public DetailedPostDto getDetailedPostById(int id){
+        return postMapper.getDetailedPostById(id);
     }
 
-    public List<Post> getAllPosts(){
+    public List<PostDto> getAllPosts(){
         return postMapper.getAllPosts();
     }
 }
