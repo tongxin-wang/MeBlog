@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.lzw.meblog.mapper.PostContentMapper">
-  <resultMap id="BaseResultMap" type="com.lzw.meblog.model.PostContent">
+<mapper namespace="com.lzw.meblog.mapper.BodyMapper">
+  <resultMap id="BaseResultMap" type="com.lzw.meblog.model.Body">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
     <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
     <result column="post_id" jdbcType="INTEGER" property="postId" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.lzw.meblog.model.PostContent">
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.lzw.meblog.model.Body">
     <result column="content" jdbcType="LONGVARCHAR" property="content" />
   </resultMap>
   <sql id="Base_Column_List">
@@ -21,21 +21,21 @@
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
-    from post_content
+    from body
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from post_content
+    delete from body
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.lzw.meblog.model.PostContent" useGeneratedKeys="true">
-    insert into post_content (gmt_create, gmt_modified, post_id, 
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.lzw.meblog.model.Body" useGeneratedKeys="true">
+    insert into body (gmt_create, gmt_modified, post_id, 
       content)
     values (#{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, #{postId,jdbcType=INTEGER}, 
       #{content,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.lzw.meblog.model.PostContent" useGeneratedKeys="true">
-    insert into post_content
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.lzw.meblog.model.Body" useGeneratedKeys="true">
+    insert into body
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="gmtCreate != null">
         gmt_create,
@@ -65,8 +65,8 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.lzw.meblog.model.PostContent">
-    update post_content
+  <update id="updateByPrimaryKeySelective" parameterType="com.lzw.meblog.model.Body">
+    update body
     <set>
       <if test="gmtCreate != null">
         gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
@@ -83,16 +83,16 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.lzw.meblog.model.PostContent">
-    update post_content
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.lzw.meblog.model.Body">
+    update body
     set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
       gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
       post_id = #{postId,jdbcType=INTEGER},
       content = #{content,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.lzw.meblog.model.PostContent">
-    update post_content
+  <update id="updateByPrimaryKey" parameterType="com.lzw.meblog.model.Body">
+    update body
     set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
       gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
       post_id = #{postId,jdbcType=INTEGER}

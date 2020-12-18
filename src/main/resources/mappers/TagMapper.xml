@@ -20,7 +20,7 @@
   </resultMap>
   <resultMap id="tagPostsResultMap" type="com.lzw.meblog.dto.TagPostsDto">
     <id column="tag_id" jdbcType="INTEGER" property="id" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="tag_name" jdbcType="VARCHAR" property="name" />
     <collection property="posts" ofType="com.lzw.meblog.dto.PostDto" resultMap="postResultMap" columnPrefix="post_"/>
   </resultMap>
   <sql id="Base_Column_List">
@@ -95,7 +95,7 @@
   <select id="getPostsByTagId" resultMap="tagPostsResultMap">
     select
       tag.id as tag_id,
-      `name`,
+      tag.`name` as tag_name,
       post.id as post_id,
       post.title as post_title,
       post.summary as post_summary,

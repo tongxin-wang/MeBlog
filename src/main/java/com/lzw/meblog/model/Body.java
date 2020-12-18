@@ -1,7 +1,5 @@
 package com.lzw.meblog.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -9,7 +7,7 @@ import java.time.LocalDateTime;
  * @author 
  * 
  */
-public class PostContent implements Serializable {
+public class Body implements Serializable {
     /**
      * 主键
      */
@@ -18,13 +16,11 @@ public class PostContent implements Serializable {
     /**
      * 创建时间
      */
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private LocalDateTime gmtCreate;
 
     /**
      * 修改时间
      */
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private LocalDateTime gmtModified;
 
     /**
@@ -90,7 +86,7 @@ public class PostContent implements Serializable {
         if (getClass() != that.getClass()) {
             return false;
         }
-        PostContent other = (PostContent) that;
+        Body other = (Body) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getGmtCreate() == null ? other.getGmtCreate() == null : this.getGmtCreate().equals(other.getGmtCreate()))
             && (this.getGmtModified() == null ? other.getGmtModified() == null : this.getGmtModified().equals(other.getGmtModified()))

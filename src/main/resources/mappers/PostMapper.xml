@@ -16,6 +16,30 @@
     <result column="img_url" jdbcType="VARCHAR" property="imgUrl" />
     <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
   </resultMap>
+  <resultMap id="categoryResultMap" type="com.lzw.meblog.dto.CategoryDto">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+  </resultMap>
+  <resultMap id="tagResultMap" type="com.lzw.meblog.dto.TagDto">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+  </resultMap>
+  <resultMap id="bodyResultMap" type="com.lzw.meblog.dto.BodyDto">
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+    <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
+  </resultMap>
+  <resultMap id="detailedPostResultMap" type="com.lzw.meblog.dto.DetailedPostDto">
+    <id column="post_id" jdbcType="INTEGER" property="id" />
+    <result column="post_title" jdbcType="VARCHAR" property="title" />
+    <result column="post_summary" jdbcType="VARCHAR" property="summary" />
+    <result column="post_img_url" jdbcType="VARCHAR" property="imgUrl" />
+    <result column="post_gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+    <result column="post_gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
+    <association property="body" javaType="com.lzw.meblog.dto.BodyDto" resultMap="bodyResultMap" columnPrefix="body_"/>
+    <collection property="categories" ofType="com.lzw.meblog.dto.CategoryDto" resultMap="categoryResultMap" columnPrefix="category_" />
+    <collection property="tags" ofType="com.lzw.meblog.dto.TagDto" resultMap="tagResultMap" columnPrefix="tag_" />
+  </resultMap>
   <sql id="Base_Column_List">
     id, title, summary, img_url, gmt_create, gmt_modified
   </sql>
@@ -102,12 +126,30 @@
       gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="getDetailedPostById" parameterType="java.lang.Integer" resultMap="postResultMap">
-    select id, title, summary, img_url, gmt_create
-    from post
-    where id = #{id}
-  </select>
   <select id="getAllPosts" resultMap="postResultMap">
     select id, title, summary, img_url, gmt_create from post
+  </select>
+  <select id="getDetailedPostById" parameterType="java.lang.Integer" resultMap="detailedPostResultMap">
+    select
+      post.id as post_id,
+      post.title as post_title,
+      post.summary as post_summary,
+      post.img_url as post_img_url,
+      post.gmt_create as post_gmt_create,
+      post.gmt_modified as post_gmt_modified,
+      category.id as category_id,
+      category.name as category_name,
+      tag.id as tag_id,
+      tag.name as tag_name,
+      body.content as body_content,
+      body.gmt_create as body_gmt_create,
+      body.gmt_modified as body_gmt_modified
+    from post
+      left outer join post_category on post.id = post_category.post_id
+      left outer join category on post_category.category_id = category.id
+      left outer join post_tag on post.id = post_tag.post_id
+      left outer join tag on post_tag.tag_id = tag.id
+      left outer join body on post.id = body.post_id
+    where post.id = #{id}
   </select>
 </mapper>

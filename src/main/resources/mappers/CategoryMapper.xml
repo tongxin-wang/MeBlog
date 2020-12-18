@@ -20,7 +20,7 @@
   </resultMap>
   <resultMap id="categoryPostsResultMap" type="com.lzw.meblog.dto.CategoryPostsDto">
     <id column="category_id" jdbcType="INTEGER" property="id" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="category_name" jdbcType="VARCHAR" property="name" />
     <collection property="posts" ofType="com.lzw.meblog.dto.PostDto" resultMap="postResultMap" columnPrefix="post_"/>
   </resultMap>
   <sql id="Base_Column_List">
@@ -95,7 +95,7 @@
   <select id="getPostsByCategoryId" resultMap="categoryPostsResultMap">
     select
       category.id as category_id,
-      `name`,
+      category.`name` as category_name,
       post.id as post_id,
       post.title as post_title,
       post.summary as post_summary,
