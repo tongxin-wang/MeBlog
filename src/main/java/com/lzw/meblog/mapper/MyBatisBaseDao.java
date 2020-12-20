@@ -19,4 +19,6 @@ public interface MyBatisBaseDao<Model, PK extends Serializable> {
     int updateByPrimaryKeySelective(Model record);
 
     int updateByPrimaryKey(Model record);
+
+
 }

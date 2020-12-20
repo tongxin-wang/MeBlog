@@ -57,6 +57,7 @@ public class DetailedPostDto {
      */
     private BodyDto body;
 
+
     public Integer getId() {
         return id;
     }
@@ -127,5 +128,20 @@ public class DetailedPostDto {
 
     public void setBody(BodyDto body) {
         this.body = body;
+    }
+
+    @Override
+    public String toString() {
+        return "DetailedPostDto{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", summary='" + summary + '\'' +
+                ", imgUrl='" + imgUrl + '\'' +
+                ", gmtCreate=" + gmtCreate +
+                ", gmtModified=" + gmtModified +
+                ", categories=" + categories +
+                ", tags=" + tags +
+                ", body=" + body +
+                '}';
     }
 }

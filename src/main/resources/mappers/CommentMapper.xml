@@ -95,4 +95,9 @@
       post_id = #{postId,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="getAllComments" parameterType="com.lzw.meblog.model.Comment" resultType="com.lzw.meblog.model.Comment">
+    select * from comment
+    where post_id = #{post_id,jdbcType=INTEGER}
+  </select>
 </mapper>
