@@ -30,22 +30,24 @@ public class PostService {
 
     /**
     * @Description: 增加一篇文章
-    * @Param: PostDto 文章封装类
+    * @Param: detailedPostDto
     * @author: LJ
     * @Date: 2020/12/18
     **/
     public void addPost(DetailedPostDto detailedPostDto){
         //增加post
         Post post = new Post();
-        post.setId(detailedPostDto.getId());
         post.setImgUrl(detailedPostDto.getImgUrl());
         post.setSummary(detailedPostDto.getSummary());
         post.setTitle(detailedPostDto.getTitle());
         post.setGmtCreate(detailedPostDto.getGmtCreate());
         post.setGmtModified(detailedPostDto.getGmtModified());
-        postMapper.insert(post);
+        //插入非空数据,除id以外,并获取生成的主键id
+        postMapper.insertSelective(post);
+        detailedPostDto.setId(post.getId());
 
-        /**
+        //在这之前，我应该是知道Category的
+
         //增加postCategory
         List<CategoryDto> categories = detailedPostDto.getCategories();
         for (CategoryDto categoryDto:categories
@@ -56,7 +58,7 @@ public class PostService {
             postCategory.setGmtCreate(detailedPostDto.getGmtCreate());
             postCategory.setGmtModified(detailedPostDto.getGmtModified());
             //id呢？自增
-            postCategoryMapper.insert(postCategory);
+            postCategoryMapper.insertSelective(postCategory);
         }
 
         //增加postTag
@@ -69,14 +71,13 @@ public class PostService {
             postTag.setGmtCreate(detailedPostDto.getGmtCreate());
             postTag.setGmtModified(detailedPostDto.getGmtModified());
             //id呢？自增
-            postTagMapper.insert(postTag);
+            postTagMapper.insertSelective(postTag);
         }
-         **/
     }
 
     /**
     * @Description: 删除一篇文章
-    * @Param:id
+    * @Param: id
     * @author: LJ
     * @Date: 2020/12/19
     **/
@@ -86,24 +87,58 @@ public class PostService {
     }
     /**
     * @Description: 更新文章信息
-    * @Param:
+    * @Param: detailedPostDto
     * @author: LJ
     * @Date: 2020/12/19
     **/
-    public void updatePost(){
+    public void updatePost(DetailedPostDto detailedPostDto){
+        //更新post中的信息， 级联更新
+        Post post = new Post();
+        post.setId(detailedPostDto.getId());
+        post.setTitle(detailedPostDto.getTitle());
+        post.setSummary(detailedPostDto.getSummary());
+        post.setImgUrl(detailedPostDto.getImgUrl());
+        post.setGmtCreate(detailedPostDto.getGmtCreate());
+        post.setGmtModified(detailedPostDto.getGmtModified());
+        postMapper.updateByPrimaryKey(post);
+        /**
+         //更新postCategory
+         List<CategoryDto> categories = detailedPostDto.getCategories();
+         for (CategoryDto categoryDto:categories
+         ) {
+         PostCategory postCategory = new PostCategory();
+         postCategory.setCategoryId(categoryDto.getId());
+         postCategory.setPostId(detailedPostDto.getId());
+         postCategory.setGmtCreate(detailedPostDto.getGmtCreate());
+         postCategory.setGmtModified(detailedPostDto.getGmtModified());
+         //id呢？自增
+         postCategoryMapper.updateByPrimaryKey(postCategory);
+         }
 
+         //更新postTag
+         List<TagDto> tagDtos = detailedPostDto.getTags();
+         for (TagDto tagDto:tagDtos
+         ) {
+         PostTag postTag = new PostTag();
+         postTag.setTagId(tagDto.getId());
+         postTag.setPostId(detailedPostDto.getId());
+         postTag.setGmtCreate(detailedPostDto.getGmtCreate());
+         postTag.setGmtModified(detailedPostDto.getGmtModified());
+         //id呢？自增
+         postTagMapper.updateByPrimaryKey(postTag);
+         }
+         **/
     }
-
 
     /**
-     * @Description: 获取刚刚插入数据的id
-     * @Param:
-     * @author: LJ
-     * @Date: 2020/12/20
-     **/
-    public int getLastId(){
+    * @Description: 更新一篇文章的分类
+    * @Param: name
+    * @author: LJ
+    * @Date: 2020/12/21
+    **/
+    public void updatePostCategory(String name){
 
-        return 0;
     }
+
 
 }
