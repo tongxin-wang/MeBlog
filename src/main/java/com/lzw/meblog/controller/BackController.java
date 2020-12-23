@@ -1,6 +1,7 @@
 package com.lzw.meblog.controller;
 
 import com.lzw.meblog.dto.*;
+import com.lzw.meblog.mapper.PostCategoryMapper;
 import com.lzw.meblog.model.*;
 import com.lzw.meblog.service.*;
 import io.swagger.annotations.*;
@@ -30,6 +31,7 @@ public class BackController {
     CategoryService categoryService;
     @Autowired
     CommentService commentService;
+
 
     /* 后台登录账号密码 */
     private static String username = "root";
@@ -116,6 +118,19 @@ public class BackController {
     }
 
     /**
+    * @Description: 更新一篇文章的分类
+    * @Param: post_id, category_id
+    * @author: LJ
+    * @Date: 2020/12/21
+    **/
+    @ApiOperation(value = "更新一篇文章的分类")
+    @PutMapping("/updatePostCategory/{post_id}/{category_id}")
+    public String updatePostCategory(@PathVariable int post_id, @PathVariable int category_id){
+        postService.updatePostCategory(post_id, category_id);
+        return "修改文章分类成功";
+    }
+
+    /**
     * @Description: 添加一条分类
     * @Param: categoryDto
     * @author: LJ
@@ -125,8 +140,8 @@ public class BackController {
     @ApiImplicitParam(name = "name", value = "分类名称", required = true, dataType = "String")
     @PostMapping("/addCategory")
     public String addCategory(@RequestBody CategoryDto categoryDto){
-        categoryService.addCategory(categoryDto);
-        return "添加分类信息成功";
+        String message = categoryService.addCategory(categoryDto);
+        return message;
     }
 
     /**
@@ -170,8 +185,8 @@ public class BackController {
     @ApiImplicitParam(name = "name", value = "标签名称", required = true, dataType = "String")
     @PostMapping("/addTag")
     public String addCategory(@RequestBody TagDto tagDto){
-        tagService.addTag(tagDto);
-        return "添加标签成功";
+        String message = tagService.addTag(tagDto);
+        return message;
     }
 
     /**

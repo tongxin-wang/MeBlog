@@ -4,6 +4,7 @@ import com.lzw.meblog.dto.CategoryDto;
 import com.lzw.meblog.dto.CategoryPostsDto;
 import com.lzw.meblog.mapper.CategoryMapper;
 import com.lzw.meblog.model.Category;
+import com.lzw.meblog.model.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,11 +29,27 @@ public class CategoryService {
     * @author: LJ
     * @Date: 2020/12/21
     **/
-    public void addCategory(CategoryDto categoryDto){
-        //没有该分类信息，其他表无法使用
-        Category category = new Category();
-        category.setName(categoryDto.getName());
-        categoryMapper.insertSelective(category);
+    public String addCategory(CategoryDto categoryDto){
+
+
+        //首先检查该tag是否已经存在
+        List<Category> categorys;
+        categorys = categoryMapper.selectIfExist(categoryDto.getName());
+
+        if (!categorys.isEmpty())
+        {
+            //该标签已经存在，不做插入处理
+            return "该分类已经存在，不做添加处理";
+        }
+        else
+        {
+            //没有该标签信息，新增
+            //没有该分类信息，其他表无法使用
+            Category category = new Category();
+            category.setName(categoryDto.getName());
+            categoryMapper.insertSelective(category);
+            return "该分类成功添加";
+        }
     }
 
     /**

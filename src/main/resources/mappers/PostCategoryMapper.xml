@@ -17,6 +17,13 @@
     from post_category
     where id = #{id,jdbcType=INTEGER}
   </select>
+
+  <select id="selectByPostId" parameterType="java.lang.Integer" resultType="com.lzw.meblog.model.PostCategory">
+    select * from post_category
+    where post_id = #{post_id, jdbcType = INTEGER}
+  </select>
+
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from post_category
     where id = #{id,jdbcType=INTEGER}

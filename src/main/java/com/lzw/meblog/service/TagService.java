@@ -29,11 +29,25 @@ public class TagService {
     * @author: LJ
     * @Date: 2020/12/21
     **/
-    public void addTag(TagDto tagDto){
-        //没有该分类信息，其他表无法使用
-        Tag tag = new Tag();
-        tag.setName(tagDto.getName());
-        tagMapper.insertSelective(tag);
+    public String addTag(TagDto tagDto){
+        //首先检查该tag是否已经存在
+        List<Tag> tags;
+        tags = tagMapper.selectIfExist(tagDto.getName());
+
+        if (!tags.isEmpty())
+        {
+            //该标签已经存在，不做插入处理
+            return "该标签已经存在，不做插入处理";
+        }
+        else
+        {
+            //没有该标签信息，新增
+            Tag tag = new Tag();
+            tag.setName(tagDto.getName());
+            tagMapper.insertSelective(tag);
+            return "该标签成功插入";
+        }
+
     }
 
     /**

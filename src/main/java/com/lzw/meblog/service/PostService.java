@@ -19,6 +19,9 @@ public class PostService {
     private PostCategoryMapper postCategoryMapper;
     @Autowired
     private PostTagMapper postTagMapper;
+    @Autowired
+    private CategoryMapper categoryMapper;
+
 
     public DetailedPostDto getDetailedPostById(int id){
         return postMapper.getDetailedPostById(id);
@@ -136,7 +139,12 @@ public class PostService {
     * @author: LJ
     * @Date: 2020/12/21
     **/
-    public void updatePostCategory(String name){
+    public void updatePostCategory(int post_id, int category_id){
+        PostCategory postCategory;
+        postCategory = postCategoryMapper.selectByPostId(post_id);
+        //更新分类id信息
+        postCategory.setCategoryId(category_id);
+        postCategoryMapper.updateByPrimaryKeySelective(postCategory);
 
     }
 

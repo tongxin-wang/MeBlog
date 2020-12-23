@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface PostCategoryMapper extends MyBatisBaseDao<PostCategory, Integer> {
+    public PostCategory selectByPostId(int post_id);
 }

@@ -42,6 +42,13 @@
     values (#{name,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}
       )
   </insert>
+
+  <select id="selectIfExist"  parameterType="java.lang.String" resultMap="BaseResultMap">
+    select *
+    from tag
+    where name = #{name,jdbcType=VARCHAR}
+  </select>
+
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.lzw.meblog.model.Tag" useGeneratedKeys="true">
     insert into tag
     <trim prefix="(" suffix=")" suffixOverrides=",">
