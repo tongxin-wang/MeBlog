@@ -1,27 +1,23 @@
 package com.lzw.meblog.controller;
 
 import com.lzw.meblog.dto.*;
-import com.lzw.meblog.mapper.PostCategoryMapper;
 import com.lzw.meblog.model.*;
 import com.lzw.meblog.service.*;
 import io.swagger.annotations.*;
-import io.swagger.models.Model;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * @program: meblog
- * @author: LJ
+ * @author: LJ TongxinWang
  * @create: 2020-12-18 19:24
  **/
 @RestController
+@CrossOrigin
 @RequestMapping("/admin")
-@Api(description = "提供给博客网站拥有者的接口")
+@Api(description = "提供给博客网站管理员的接口")
 public class BackController {
     @Autowired
     PostService postService;
@@ -32,10 +28,9 @@ public class BackController {
     @Autowired
     CommentService commentService;
 
-
     /* 后台登录账号密码 */
-    private static String username = "root";
-    private static String password = "root";
+    private static String username = "admin";
+    private static String password = "justfortest";
 
     /**
     * @Description: 后台登陆操作
@@ -43,16 +38,33 @@ public class BackController {
     * @author: LJ
     * @Date: 2020/12/18
     **/
+    @ApiOperation(value = "登录")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "username", value = "用户名", required = true, dataType = "String", paramType = "form"),
+            @ApiImplicitParam(name = "password", value = "密码", required = true, dataType = "String", paramType = "form")
+    })
     @PostMapping("/login")
-    public String login(User user, HttpServletRequest request, HttpServletResponse  response) throws IOException {
-        // 验证用户账号是否正确
-        if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
-            request.getSession().setAttribute("user", user);
-            response.sendRedirect(request.getContextPath() + "/admin/index.html");
-        } else {
-            response.sendRedirect(request.getContextPath() + "/toLogin");
+    public LoginResult login(User user, HttpSession session){
+        LoginResult loginResult = new LoginResult();
+        // 验证管理员
+        if(user.getUsername().equals(username) && user.getPassword().equals(password)){
+            session.setAttribute("user", user);
+            loginResult.setCode(200);
+            loginResult.setMsg("Authentication successful!");
         }
-        return null;
+        else{
+            loginResult.setCode(400);
+            loginResult.setMsg("Authentication failed!");
+        }
+
+        return loginResult;
+    }
+
+    @ApiOperation(value = "退出当前登录")
+    @GetMapping("/logout")
+    public String logout(HttpSession session){
+        session.invalidate();
+        return "Logout successful!";
     }
 
     /**
@@ -67,8 +79,8 @@ public class BackController {
             @ApiImplicitParam(name = "title", value = "文章标题", required = true, dataType = "String"),
             @ApiImplicitParam(name = "summary", value = "文章简介", required = true, dataType = "String"),
             @ApiImplicitParam(name = "imgUrl", value = "文章题图url", required = true, dataType = "String"),
-            @ApiImplicitParam(name = "gmtCreate", value = "创建时间", required = true, dataType = "LocalDateTime"),
-            @ApiImplicitParam(name = "gmtModified", value = "创建时间", required = true, dataType = "LocalDateTime"),
+            @ApiImplicitParam(name = "gmtCreate", value = "创建时间", required = false, dataType = "LocalDateTime"),
+            @ApiImplicitParam(name = "gmtModified", value = "创建时间", required = false, dataType = "LocalDateTime"),
             @ApiImplicitParam(name = "categories", value = "文章分类", required = true, dataType = "List<CategoryDto>"),
             @ApiImplicitParam(name = "tags", value = "文章标签", required = true, dataType = "List<TagDto>"),
             @ApiImplicitParam(name = "body", value = "文章md源码", required = true, dataType = "BodyDto")
