@@ -14,4 +14,6 @@ import java.util.List;
 public interface TagMapper extends MyBatisBaseDao<Tag, Integer> {
     List<TagDto> getAllTags();
     TagPostsDto getPostsByTagId(int id);
+
+    List<Tag> selectIfExist(String name);
 }

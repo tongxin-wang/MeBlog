@@ -93,4 +93,6 @@ public class FrontController {
     public TagPostsDto getPostsByTagId(@PathVariable int id){
         return tagService.getPostsByTagId(id);
     }
+
+    
 }
