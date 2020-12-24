@@ -29,7 +29,7 @@ public class CategoryService {
     * @author: LJ
     * @Date: 2020/12/21
     **/
-    public String addCategory(CategoryDto categoryDto){
+    public Category addCategory(CategoryDto categoryDto){
         //首先检查该分类是否已经存在
         Category category;
         category = categoryMapper.selectIfExist(categoryDto.getName());
@@ -37,7 +37,6 @@ public class CategoryService {
         if (category!=null)
         {
             //该分类已经存在，不做插入处理
-            return "该分类已经存在，不做添加处理";
         }
         else
         {
@@ -46,8 +45,9 @@ public class CategoryService {
             category = new Category();
             category.setName(categoryDto.getName());
             categoryMapper.insertSelective(category);
-            return "该分类成功添加";
         }
+
+        return category;
     }
 
     /**

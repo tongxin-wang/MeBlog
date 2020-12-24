@@ -18,7 +18,7 @@
     where id = #{id,jdbcType=INTEGER}
   </select>
 
-  <select id="selectByPostId" parameterType="java.lang.Integer" resultType="BaseResultMap">
+  <select id="selectByPostId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from post_tag

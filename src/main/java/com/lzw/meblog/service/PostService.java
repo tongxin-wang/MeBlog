@@ -92,15 +92,14 @@ public class PostService {
     * @author: LJ
     * @Date: 2020/12/19
     **/
-    public void updatePost(DetailedPostDto detailedPostDto){
-        //更新post中的信息， 级联更新
+    public String updatePost(DetailedPostDto detailedPostDto){
+        //更新post中的信息
         Post post = new Post();
         post.setId(detailedPostDto.getId());
         post.setTitle(detailedPostDto.getTitle());
         post.setSummary(detailedPostDto.getSummary());
         post.setImgUrl(detailedPostDto.getImgUrl());
         post.setGmtCreate(detailedPostDto.getGmtCreate());
-        post.setGmtModified(detailedPostDto.getGmtModified());
         postMapper.updateByPrimaryKeySelective(post);
 
          //获取新的Category信息
@@ -133,7 +132,7 @@ public class PostService {
             //id呢？自增
             postTagMapper.insertSelective(postTag);
          }
-
+        return "进行更新操作";
     }
 
     /**
