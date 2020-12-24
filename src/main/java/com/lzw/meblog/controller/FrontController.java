@@ -18,7 +18,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/api")
-@CrossOrigin("http://localhost:8080")
+@CrossOrigin
 @Api(description = "提供给博客网站访问者的接口")
 public class FrontController {
     @Autowired
