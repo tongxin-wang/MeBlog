@@ -15,6 +15,6 @@ public interface CategoryMapper extends MyBatisBaseDao<Category, Integer> {
     List<CategoryDto> getAllCategories();
     CategoryPostsDto getPostsByCategoryId(int id);
 
-    List<Category> selectIfExist(String name);
+    Category selectIfExist(String name);
 
 }

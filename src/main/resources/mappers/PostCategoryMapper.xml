@@ -28,6 +28,12 @@
     delete from post_category
     where id = #{id,jdbcType=INTEGER}
   </delete>
+
+  <delete id="deleteByPostId" parameterType="java.lang.Integer">
+    delete from post_category
+    where post_id = #{post_id,jdbcType=INTEGER}
+  </delete>
+
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.lzw.meblog.model.PostCategory" useGeneratedKeys="true">
     insert into post_category (post_id, category_id, gmt_create, 
       gmt_modified)

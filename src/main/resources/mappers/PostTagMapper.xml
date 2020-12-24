@@ -17,10 +17,24 @@
     from post_tag
     where id = #{id,jdbcType=INTEGER}
   </select>
+
+  <select id="selectByPostId" parameterType="java.lang.Integer" resultType="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from post_tag
+    where post_id = #{post_id,jdbcType=INTEGER}
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from post_tag
     where id = #{id,jdbcType=INTEGER}
   </delete>
+
+  <delete id="deleteByPostId" parameterType="java.lang.Integer">
+    delete from post_tag
+    where post_id = #{post_id,jdbcType=INTEGER}
+  </delete>
+
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.lzw.meblog.model.PostTag" useGeneratedKeys="true">
     insert into post_tag (post_id, tag_id, gmt_create, 
       gmt_modified)

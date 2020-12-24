@@ -30,22 +30,20 @@ public class CategoryService {
     * @Date: 2020/12/21
     **/
     public String addCategory(CategoryDto categoryDto){
+        //首先检查该分类是否已经存在
+        Category category;
+        category = categoryMapper.selectIfExist(categoryDto.getName());
 
-
-        //首先检查该tag是否已经存在
-        List<Category> categorys;
-        categorys = categoryMapper.selectIfExist(categoryDto.getName());
-
-        if (!categorys.isEmpty())
+        if (category!=null)
         {
-            //该标签已经存在，不做插入处理
+            //该分类已经存在，不做插入处理
             return "该分类已经存在，不做添加处理";
         }
         else
         {
-            //没有该标签信息，新增
+            //没有该分类信息，新增
             //没有该分类信息，其他表无法使用
-            Category category = new Category();
+            category = new Category();
             category.setName(categoryDto.getName());
             categoryMapper.insertSelective(category);
             return "该分类成功添加";
@@ -75,6 +73,7 @@ public class CategoryService {
         category.setId(categoryDto.getId());
         category.setName(categoryDto.getName());
         categoryMapper.updateByPrimaryKeySelective(category);
+
     }
 
 

@@ -31,10 +31,10 @@ public class TagService {
     **/
     public String addTag(TagDto tagDto){
         //首先检查该tag是否已经存在
-        List<Tag> tags;
-        tags = tagMapper.selectIfExist(tagDto.getName());
+        Tag tag;
+        tag = tagMapper.selectIfExist(tagDto.getName());
 
-        if (!tags.isEmpty())
+        if (tag!=null)
         {
             //该标签已经存在，不做插入处理
             return "该标签已经存在，不做插入处理";
@@ -42,7 +42,7 @@ public class TagService {
         else
         {
             //没有该标签信息，新增
-            Tag tag = new Tag();
+            tag = new Tag();
             tag.setName(tagDto.getName());
             tagMapper.insertSelective(tag);
             return "该标签成功插入";

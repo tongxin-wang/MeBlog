@@ -2,6 +2,7 @@ package com.lzw.meblog.mapper;
 
 import com.lzw.meblog.dto.TagDto;
 import com.lzw.meblog.dto.TagPostsDto;
+import com.lzw.meblog.model.PostCategory;
 import com.lzw.meblog.model.Tag;
 import org.springframework.stereotype.Repository;
 
@@ -15,5 +16,5 @@ public interface TagMapper extends MyBatisBaseDao<Tag, Integer> {
     List<TagDto> getAllTags();
     TagPostsDto getPostsByTagId(int id);
 
-    List<Tag> selectIfExist(String name);
+    Tag selectIfExist(String name);
 }

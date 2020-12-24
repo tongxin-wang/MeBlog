@@ -67,13 +67,13 @@ public class BackController {
             @ApiImplicitParam(name = "title", value = "文章标题", required = true, dataType = "String"),
             @ApiImplicitParam(name = "summary", value = "文章简介", required = true, dataType = "String"),
             @ApiImplicitParam(name = "imgUrl", value = "文章题图url", required = true, dataType = "String"),
-            @ApiImplicitParam(name = "gmtCreate", value = "创建时间", required = true, dataType = "LocalDateTime"),
-            @ApiImplicitParam(name = "gmtModified", value = "创建时间", required = true, dataType = "LocalDateTime"),
+            @ApiImplicitParam(name = "gmtCreate", value = "创建时间", required = false, dataType = "LocalDateTime"),
+            @ApiImplicitParam(name = "gmtModified", value = "创建时间", required = false, dataType = "LocalDateTime"),
             @ApiImplicitParam(name = "categories", value = "文章分类", required = true, dataType = "List<CategoryDto>"),
             @ApiImplicitParam(name = "tags", value = "文章标签", required = true, dataType = "List<TagDto>"),
             @ApiImplicitParam(name = "body", value = "文章md源码", required = true, dataType = "BodyDto")
     })
-    @PostMapping("/addPost")        //@RequestBody 利用一个对象去获取前端传过来的数据
+    @PostMapping("/Post")        //@RequestBody 利用一个对象去获取前端传过来的数据
     public String addPost(@RequestBody DetailedPostDto detailedPostDto){
         postService.addPost(detailedPostDto);
         return "添加文章成功"+ detailedPostDto.toString();
@@ -87,7 +87,7 @@ public class BackController {
     **/
     @ApiOperation(value = "删除一篇文章")
     @ApiImplicitParam(name = "id", value = "文章ID", required = true, dataType = "Integer")
-    @DeleteMapping("/deletePost/{id}")
+    @DeleteMapping("/Post/{id}")
     public String deletePost(@PathVariable int id){
         postService.DeletePost(id);
         return "删除文章成功";
@@ -111,7 +111,7 @@ public class BackController {
             @ApiImplicitParam(name = "tags", value = "文章标签", required = true, dataType = "List<TagDto>"),
             @ApiImplicitParam(name = "body", value = "文章md源码", required = true, dataType = "BodyDto")
     })
-    @PutMapping("/updatePost")
+    @PutMapping("/Post")
     public String updatPost(@RequestBody DetailedPostDto detailedPostDto){
         postService.updatePost(detailedPostDto);
         return "更新文章成功";
@@ -124,7 +124,7 @@ public class BackController {
     * @Date: 2020/12/21
     **/
     @ApiOperation(value = "更新一篇文章的分类")
-    @PutMapping("/updatePostCategory/{post_id}/{category_id}")
+    @PutMapping("/PostCategory/{post_id}/{category_id}")
     public String updatePostCategory(@PathVariable int post_id, @PathVariable int category_id){
         postService.updatePostCategory(post_id, category_id);
         return "修改文章分类成功";
@@ -138,7 +138,7 @@ public class BackController {
     **/
     @ApiOperation(value = "添加一条分类")
     @ApiImplicitParam(name = "name", value = "分类名称", required = true, dataType = "String")
-    @PostMapping("/addCategory")
+    @PostMapping("/Category")
     public String addCategory(@RequestBody CategoryDto categoryDto){
         String message = categoryService.addCategory(categoryDto);
         return message;
@@ -152,7 +152,7 @@ public class BackController {
     **/
     @ApiOperation(value = "删除一条分类")
     @ApiImplicitParam(name = "id", value = "分类ID", required = true, dataType = "Integer")
-    @DeleteMapping("/deleteCategory/{id}")
+    @DeleteMapping("/Category/{id}")
     public String deleteCategory(@PathVariable int id){
         categoryService.deleteCategory(id);
         return "删除分类成功";
@@ -169,7 +169,7 @@ public class BackController {
             @ApiImplicitParam(name = "id", value = "分类id", required = true, dataType = "Integer"),
             @ApiImplicitParam(name = "name", value = "分类名称", required = true, dataType = "String")
     })
-    @PutMapping("/updateCategory")
+    @PutMapping("/Category")
     public String updatCategory(@RequestBody CategoryDto categoryDto){
         categoryService.updateCategory(categoryDto);
         return "更新分类成功";
@@ -183,7 +183,7 @@ public class BackController {
     **/
     @ApiOperation(value = "新增一条标签")
     @ApiImplicitParam(name = "name", value = "标签名称", required = true, dataType = "String")
-    @PostMapping("/addTag")
+    @PostMapping("/Tag")
     public String addCategory(@RequestBody TagDto tagDto){
         String message = tagService.addTag(tagDto);
         return message;
@@ -197,7 +197,7 @@ public class BackController {
     **/
     @ApiOperation(value = "删除一条标签")
     @ApiImplicitParam(name = "id", value = "标签ID", required = true, dataType = "Integer")
-    @DeleteMapping("/deleteTag/{id}")
+    @DeleteMapping("/Tag/{id}")
     public String deleteTag(@PathVariable int id){
         tagService.deleteTag(id);
         return "删除标签成功";
@@ -214,7 +214,7 @@ public class BackController {
             @ApiImplicitParam(name = "id", value = "标签id", required = true, dataType = "Integer"),
             @ApiImplicitParam(name = "name", value = "标签名称", required = true, dataType = "String")
     })
-    @PutMapping("/updateTag")
+    @PutMapping("/Tag")
     public String updatCategory(@RequestBody TagDto tagDto){
         tagService.updateTag(tagDto);
         return "更新标签成功";

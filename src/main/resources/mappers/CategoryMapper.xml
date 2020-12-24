@@ -34,7 +34,8 @@
   </select>
 
   <select id="selectIfExist"  parameterType="java.lang.String" resultMap="BaseResultMap">
-    select *
+    select
+    <include refid="Base_Column_List" />
     from category
     where name = #{name,jdbcType=VARCHAR}
   </select>

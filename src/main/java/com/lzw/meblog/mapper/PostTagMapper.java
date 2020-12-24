@@ -8,4 +8,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface PostTagMapper extends MyBatisBaseDao<PostTag, Integer> {
+
+    public PostTag selectByPostId(int post_id);
+    public void deleteByPostId(int post_id);
 }
