@@ -138,7 +138,7 @@ public class PostService {
 
     /**
     * @Description: 更新一篇文章的分类
-    * @Param: name
+    * @Param: post_id, category_id
     * @author: LJ
     * @Date: 2020/12/21
     **/
@@ -152,7 +152,7 @@ public class PostService {
 
     /**
     * @Description: 更新一篇文章的标签信息
-    * @Param:
+    * @Param: post_id, tag_id
     * @author: LJ
     * @Date: 2020/12/24
     **/
