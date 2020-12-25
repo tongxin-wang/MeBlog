@@ -1,10 +1,10 @@
-package com.lzw.meblog.dto;
+package com.lzw.meblog.model;
 
 /**
  * 返回给前端的登录信息
  * @author TongxinWang
  */
-public class LoginResult {
+public class Result {
     //状态码
     private Integer code;
     //详细信息（是否验证成功）

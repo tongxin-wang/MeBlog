@@ -39,7 +39,7 @@ public class PostService {
     * @author: LJ
     * @Date: 2020/12/08
     **/
-    public void addPost(DetailedPostDto detailedPostDto){
+    public boolean addPost(DetailedPostDto detailedPostDto){
         //增加post
         Post post = new Post();
         post.setImgUrl(detailedPostDto.getImgUrl());
@@ -90,6 +90,7 @@ public class PostService {
             postTag.setPostId(detailedPostDto.getId());
             postTagMapper.insertSelective(postTag);
         }
+        return true;
     }
 
     /**
@@ -98,9 +99,10 @@ public class PostService {
     * @author: LJ
     * @Date: 2020/12/09
     **/
-    public void DeletePost(int id){
+    public boolean DeletePost(int id){
         //从post中删除,级联删除
         postMapper.deleteByPrimaryKey(id);
+        return true;
     }
     /**
     * @Description: 更新文章信息
@@ -108,7 +110,7 @@ public class PostService {
     * @author: LJ
     * @Date: 2020/12/09
     **/
-    public String updatePost(DetailedPostDto detailedPostDto){
+    public boolean updatePost(DetailedPostDto detailedPostDto){
         //更新post中的信息
         Post post = new Post();
         post.setId(detailedPostDto.getId());
@@ -163,7 +165,7 @@ public class PostService {
             postTag.setPostId(detailedPostDto.getId());
             postTagMapper.insertSelective(postTag);
          }
-        return "进行更新操作";
+        return true;
     }
 
     /**

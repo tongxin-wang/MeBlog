@@ -45,20 +45,20 @@ public class BackController {
             @ApiImplicitParam(name = "password", value = "密码", required = true, dataType = "String", paramType = "form")
     })
     @PostMapping("/login")
-    public LoginResult login(User user, HttpSession session){
-        LoginResult loginResult = new LoginResult();
+    public Result login(User user, HttpSession session){
+        Result result = new Result();
         // 验证管理员
         if(user.getUsername().equals(username) && user.getPassword().equals(password)){
             session.setAttribute("user", user);
-            loginResult.setCode(200);
-            loginResult.setMsg("Authentication successful!");
+            result.setCode(200);
+            result.setMsg("Authentication successful!");
         }
         else{
-            loginResult.setCode(400);
-            loginResult.setMsg("Authentication failed!");
+            result.setCode(400);
+            result.setMsg("Authentication failed!");
         }
 
-        return loginResult;
+        return result;
     }
 
     @ApiOperation(value = "退出当前登录")
@@ -87,9 +87,20 @@ public class BackController {
             @ApiImplicitParam(name = "body", value = "文章md源码", required = true, dataType = "BodyDto")
     })
     @PostMapping("/post")        //@RequestBody 利用一个对象去获取前端传过来的数据
-    public String addPost(@RequestBody DetailedPostDto detailedPostDto){
-        postService.addPost(detailedPostDto);
-        return "添加文章成功"+ detailedPostDto.toString();
+    public Result addPost(@RequestBody DetailedPostDto detailedPostDto){
+        boolean fig = postService.addPost(detailedPostDto);
+        Result result = new Result();
+        if (fig==true)
+        {
+            result.setCode(200);
+            result.setMsg("添加文章成功!");
+        }
+        else
+        {
+            result.setCode(400);
+            result.setMsg("添加文章失败!");
+        }
+        return result;
     }
     
     /**
@@ -101,9 +112,20 @@ public class BackController {
     @ApiOperation(value = "删除一篇文章")
     @ApiImplicitParam(name = "id", value = "文章ID", required = true, dataType = "Integer")
     @DeleteMapping("/post/{id}")
-    public String deletePost(@PathVariable int id){
-        postService.DeletePost(id);
-        return "删除文章成功";
+    public Result deletePost(@PathVariable int id){
+        boolean fig = postService.DeletePost(id);
+        Result result = new Result();
+        if (fig==true)
+        {
+            result.setCode(200);
+            result.setMsg("删除文章成功!");
+        }
+        else
+        {
+            result.setCode(400);
+            result.setMsg("删除文章失败!");
+        }
+        return result;
     }
 
     /**
@@ -125,9 +147,20 @@ public class BackController {
             @ApiImplicitParam(name = "body", value = "文章md源码", required = true, dataType = "BodyDto")
     })
     @PutMapping("/post")
-    public String updatePost(@RequestBody DetailedPostDto detailedPostDto){
-         String message = postService.updatePost(detailedPostDto);
-        return message+"更新文章成功";
+    public Result updatePost(@RequestBody DetailedPostDto detailedPostDto){
+         boolean fig = postService.updatePost(detailedPostDto);
+        Result result = new Result();
+        if (fig==true)
+        {
+            result.setCode(200);
+            result.setMsg("更新文章成功!");
+        }
+        else
+        {
+            result.setCode(400);
+            result.setMsg("更新文章失败!");
+        }
+        return result;
     }
 
     /**
