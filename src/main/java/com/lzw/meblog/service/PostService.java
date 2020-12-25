@@ -51,16 +51,23 @@ public class PostService {
         postMapper.insertSelective(post);
         detailedPostDto.setId(post.getId());
 
-        //增加postCategory
+        //增加postCategory信息
         List<CategoryDto> categories = detailedPostDto.getCategories();
         for (CategoryDto categoryDto:categories
              ) {
+            //获取name，检查是否在数据库中存在
+            Category category = categoryMapper.selectIfExist(categoryDto.getName());
+            if (category==null)
+            {
+                //不存在则新增信息
+                category = new Category();
+                category.setName(categoryDto.getName());
+                categoryMapper.insertSelective(category);
+            }
+            categoryDto.setId(category.getId());
             PostCategory postCategory = new PostCategory();
             postCategory.setCategoryId(categoryDto.getId());
             postCategory.setPostId(detailedPostDto.getId());
-            postCategory.setGmtCreate(detailedPostDto.getGmtCreate());
-            postCategory.setGmtModified(detailedPostDto.getGmtModified());
-            //id呢？自增
             postCategoryMapper.insertSelective(postCategory);
         }
 
@@ -68,12 +75,19 @@ public class PostService {
         List<TagDto> tagDtos = detailedPostDto.getTags();
         for (TagDto tagDto:tagDtos
              ) {
+            //获取name，检查是否在数据库中存在
+            Tag tag = tagMapper.selectIfExist(tagDto.getName());
+            if (tag==null)
+            {
+                //不存在则新增信息
+                tag = new Tag();
+                tag.setName(tagDto.getName());
+                tagMapper.insertSelective(tag);
+            }
+            tagDto.setId(tag.getId());
             PostTag postTag = new PostTag();
             postTag.setTagId(tagDto.getId());
             postTag.setPostId(detailedPostDto.getId());
-            postTag.setGmtCreate(detailedPostDto.getGmtCreate());
-            postTag.setGmtModified(detailedPostDto.getGmtModified());
-            //id呢？自增
             postTagMapper.insertSelective(postTag);
         }
     }
@@ -104,12 +118,22 @@ public class PostService {
         post.setGmtCreate(detailedPostDto.getGmtCreate());
         postMapper.updateByPrimaryKeySelective(post);
 
-         //获取新的Category信息
+         //获取新的Category信息,这时候只有名字信息
          List<CategoryDto> categories = detailedPostDto.getCategories();
          //删除原有表的信息
          postCategoryMapper.deleteByPostId(detailedPostDto.getId());
          //添加新的Category信息
          for (CategoryDto categoryDto:categories) {
+             //获取name，检查是否在数据库中存在
+             Category category = categoryMapper.selectIfExist(categoryDto.getName());
+             if (category==null)
+             {
+                 //不存在则新增信息
+                 category = new Category();
+                 category.setName(categoryDto.getName());
+                 categoryMapper.insertSelective(category);
+             }
+             categoryDto.setId(category.getId());
             PostCategory postCategory = new PostCategory();
             //获取Category_id
             postCategory.setCategoryId(categoryDto.getId());
@@ -123,6 +147,16 @@ public class PostService {
         postTagMapper.deleteByPostId(detailedPostDto.getId());
         //添加新的Category信息
          for (TagDto tagDto:tagDtos) {
+             //获取name，检查是否在数据库中存在
+             Tag tag = tagMapper.selectIfExist(tagDto.getName());
+             if (tag==null)
+             {
+                 //不存在则新增信息
+                 tag = new Tag();
+                 tag.setName(tagDto.getName());
+                 tagMapper.insertSelective(tag);
+             }
+             tagDto.setId(tag.getId());
             PostTag postTag = new PostTag();
             //获取tag_id
             postTag.setTagId(tagDto.getId());

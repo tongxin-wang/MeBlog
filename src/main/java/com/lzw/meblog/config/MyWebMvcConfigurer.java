@@ -14,6 +14,6 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry){
         //添加拦截规则（拦截除/admin/login以外的后台管理请求）
-        registry.addInterceptor(new BackInterceptor()).addPathPatterns("/admin/*").excludePathPatterns("/admin/login");
+        //registry.addInterceptor(new BackInterceptor()).addPathPatterns("/admin/*").excludePathPatterns("/admin/login");
     }
 }
