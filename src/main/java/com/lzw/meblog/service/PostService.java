@@ -154,14 +154,14 @@ public class PostService {
             //获取Category_id
             postCategory.setCategoryId(categoryDto.getId());
             postCategory.setPostId(detailedPostDto.getId());
-            postCategoryMapper.updateByPrimaryKeySelective(postCategory);
+            postCategoryMapper.insertSelective(postCategory);
          }
 
-        //获取新的Category信息
+        //获取新的tag信息
         List<TagDto> tagDtos = detailedPostDto.getTags();
         //删除原有表的信息
         postTagMapper.deleteByPostId(detailedPostDto.getId());
-        //添加新的Category信息
+        //添加新的tag信息
          for (TagDto tagDto:tagDtos) {
              //获取name，检查是否在数据库中存在
              Tag tag = tagMapper.selectIfExist(tagDto.getName());
