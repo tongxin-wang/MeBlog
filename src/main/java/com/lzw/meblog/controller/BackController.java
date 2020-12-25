@@ -197,9 +197,20 @@ public class BackController {
     @ApiOperation(value = "添加一条分类")
     @ApiImplicitParam(name = "name", value = "分类名称", required = true, dataType = "String")
     @PostMapping("/category")
-    public String addCategory(@RequestBody CategoryDto categoryDto){
-        Category category = categoryService.addCategory(categoryDto);
-        return category.toString();
+    public Result addCategory(@RequestBody CategoryDto categoryDto){
+        boolean fig = categoryService.addCategory(categoryDto);
+        Result result = new Result();
+        if (fig==true)
+        {
+            result.setCode(200);
+            result.setMsg("添加标签成功!");
+        }
+        else
+        {
+            result.setCode(400);
+            result.setMsg("添加标签失败!");
+        }
+        return result;
     }
 
     /**
@@ -211,9 +222,20 @@ public class BackController {
     @ApiOperation(value = "删除一条分类")
     @ApiImplicitParam(name = "id", value = "分类ID", required = true, dataType = "Integer")
     @DeleteMapping("/category/{id}")
-    public String deleteCategory(@PathVariable int id){
-        categoryService.deleteCategory(id);
-        return "删除分类成功";
+    public Result deleteCategory(@PathVariable int id){
+        boolean fig = categoryService.deleteCategory(id);
+        Result result = new Result();
+        if (fig==true)
+        {
+            result.setCode(200);
+            result.setMsg("删除标签成功!");
+        }
+        else
+        {
+            result.setCode(400);
+            result.setMsg("删除标签失败!");
+        }
+        return result;
     }
 
     /**
@@ -228,9 +250,20 @@ public class BackController {
             @ApiImplicitParam(name = "name", value = "分类名称", required = true, dataType = "String")
     })
     @PutMapping("/category")
-    public String updatCategory(@RequestBody CategoryDto categoryDto){
-        categoryService.updateCategory(categoryDto);
-        return "更新分类成功";
+    public Result updatCategory(@RequestBody CategoryDto categoryDto){
+        boolean fig = categoryService.updateCategory(categoryDto);
+        Result result = new Result();
+        if (fig==true)
+        {
+            result.setCode(200);
+            result.setMsg("更新分类成功!");
+        }
+        else
+        {
+            result.setCode(400);
+            result.setMsg("更新分类失败!");
+        }
+        return result;
     }
 
     /**
@@ -242,9 +275,20 @@ public class BackController {
     @ApiOperation(value = "新增一条标签")
     @ApiImplicitParam(name = "name", value = "标签名称", required = true, dataType = "String")
     @PostMapping("/tag")
-    public String addCategory(@RequestBody TagDto tagDto){
-        Tag tag = tagService.addTag(tagDto);
-        return tag.toString();
+    public Result addCategory(@RequestBody TagDto tagDto){
+        boolean fig = tagService.addTag(tagDto);
+        Result result = new Result();
+        if (fig==true)
+        {
+            result.setCode(200);
+            result.setMsg("添加标签成功!");
+        }
+        else
+        {
+            result.setCode(400);
+            result.setMsg("添加标签失败!");
+        }
+        return result;
     }
 
     /**
@@ -256,9 +300,20 @@ public class BackController {
     @ApiOperation(value = "删除一条标签")
     @ApiImplicitParam(name = "id", value = "标签ID", required = true, dataType = "Integer")
     @DeleteMapping("/tag/{id}")
-    public String deleteTag(@PathVariable int id){
-        tagService.deleteTag(id);
-        return "删除标签成功";
+    public Result deleteTag(@PathVariable int id){
+        boolean fig = tagService.deleteTag(id);
+        Result result = new Result();
+        if (fig==true)
+        {
+            result.setCode(200);
+            result.setMsg("添加标签成功!");
+        }
+        else
+        {
+            result.setCode(400);
+            result.setMsg("添加标签失败!");
+        }
+        return result;
     }
 
     /**
@@ -273,9 +328,20 @@ public class BackController {
             @ApiImplicitParam(name = "name", value = "标签名称", required = true, dataType = "String")
     })
     @PutMapping("/tag")
-    public String updateCategory(@RequestBody TagDto tagDto){
-        tagService.updateTag(tagDto);
-        return "更新标签成功";
+    public Result updateCategory(@RequestBody TagDto tagDto){
+        boolean fig = tagService.updateTag(tagDto);
+        Result result = new Result();
+        if (fig==true)
+        {
+            result.setCode(200);
+            result.setMsg("添加标签成功!");
+        }
+        else
+        {
+            result.setCode(400);
+            result.setMsg("添加标签失败!");
+        }
+        return result;
     }
 
 }

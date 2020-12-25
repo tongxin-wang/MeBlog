@@ -29,7 +29,7 @@ public class CategoryService {
     * @author: LJ
     * @Date: 2020/12/11
     **/
-    public Category addCategory(CategoryDto categoryDto){
+    public boolean addCategory(CategoryDto categoryDto){
         //首先检查该分类是否已经存在
         Category category;
         category = categoryMapper.selectIfExist(categoryDto.getName());
@@ -47,7 +47,7 @@ public class CategoryService {
             categoryMapper.insertSelective(category);
         }
 
-        return category;
+        return true;
     }
 
     /**
@@ -56,9 +56,10 @@ public class CategoryService {
     * @author: LJ
     * @Date: 2020/12/11
     **/
-    public void deleteCategory(int id){
+    public boolean deleteCategory(int id){
         //级联删除
         categoryMapper.deleteByPrimaryKey(id);
+        return true;
     }
 
     /**
@@ -67,13 +68,13 @@ public class CategoryService {
     * @author: LJ
     * @Date: 2020/12/11
     **/
-    public void updateCategory(CategoryDto categoryDto){
+    public boolean updateCategory(CategoryDto categoryDto){
         //级联更新
         Category category = new Category();
         category.setId(categoryDto.getId());
         category.setName(categoryDto.getName());
         categoryMapper.updateByPrimaryKeySelective(category);
-
+        return true;
     }
 
 

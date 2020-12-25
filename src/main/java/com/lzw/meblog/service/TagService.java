@@ -29,7 +29,7 @@ public class TagService {
     * @author: LJ
     * @Date: 2020/12/11
     **/
-    public Tag addTag(TagDto tagDto){
+    public boolean addTag(TagDto tagDto){
         //首先检查该tag是否已经存在
         Tag tag;
         tag = tagMapper.selectIfExist(tagDto.getName());
@@ -45,7 +45,7 @@ public class TagService {
             tag.setName(tagDto.getName());
             tagMapper.insertSelective(tag);
         }
-        return tag;
+        return true;
     }
 
     /**
@@ -54,9 +54,11 @@ public class TagService {
     * @author: LJ
     * @Date: 2020/12/11
     **/
-    public void deleteTag(int id){
+    public boolean deleteTag(int id){
         //级联删除
         tagMapper.deleteByPrimaryKey(id);
+
+        return true;
     }
 
     /**
@@ -65,12 +67,13 @@ public class TagService {
     * @author: LJ
     * @Date: 2020/12/11
     **/
-    public void updateTag(TagDto tagDto){
+    public boolean updateTag(TagDto tagDto){
         //级联更新
         Tag tag = new Tag();
         tag.setId(tagDto.getId());
         tag.setName(tagDto.getName());
         tagMapper.updateByPrimaryKeySelective(tag);
+        return true;
     }
 
 
