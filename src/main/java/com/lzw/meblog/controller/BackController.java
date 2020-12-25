@@ -163,18 +163,6 @@ public class BackController {
         return result;
     }
 
-    /**
-    * @Description: 更新一篇文章的分类
-    * @Param: post_id, category_id
-    * @author: LJ
-    * @Date: 2020/12/11
-    **/
-    @ApiOperation(value = "更新一篇文章的分类")
-    @PutMapping("/postCategory/{post_id}/{category_id}")
-    public String updatePostCategory(@PathVariable int post_id, @PathVariable String category_name){
-        postService.updatePostCategory(post_id, category_name);
-        return "修改文章分类成功";
-    }
 
     /**
     * @Description: 添加一条分类
