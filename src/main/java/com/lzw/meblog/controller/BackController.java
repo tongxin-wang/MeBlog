@@ -36,8 +36,8 @@ public class BackController {
     /**
     * @Description: 后台登陆操作
     * @Param:
-    * @author: LJ
-    * @Date: 2020/12/08
+    * @author: TongxinWang
+    * @Date: 2020/12/23
     **/
     @ApiOperation(value = "登录")
     @ApiImplicitParams({
@@ -56,6 +56,30 @@ public class BackController {
         else{
             result.setCode(400);
             result.setMsg("Authentication failed!");
+        }
+
+        return result;
+    }
+
+    /**
+     * @Description: 获取当前状态（是否登录）
+     * @Param:
+     * @author: TongxinWang
+     * @Date: 2020/12/25
+     **/
+    @ApiOperation(value = "获取当前状态（是否登录）")
+    @GetMapping("/state")
+    public Result getLoginState(HttpSession session){
+        Result result = new Result();
+        User user = (User)session.getAttribute("user");
+        //判断是否登录
+        if(user == null){
+            result.setCode(400);
+            result.setMsg("未登录");
+        }
+        else{
+            result.setCode(200);
+            result.setMsg("已登录");
         }
 
         return result;
