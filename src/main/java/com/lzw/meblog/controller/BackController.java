@@ -79,7 +79,7 @@ public class BackController {
             @ApiImplicitParam(name = "id", value = "文章主键", required = false, dataType = "Integer"),
             @ApiImplicitParam(name = "title", value = "文章标题", required = true, dataType = "String"),
             @ApiImplicitParam(name = "summary", value = "文章简介", required = true, dataType = "String"),
-            @ApiImplicitParam(name = "imgUrl", value = "文章题图url", required = true, dataType = "String"),
+            @ApiImplicitParam(name = "imgUrl", value = "文章题图url", required = false, dataType = "String"),
             @ApiImplicitParam(name = "gmtCreate", value = "创建时间", required = false, dataType = "LocalDateTime"),
             @ApiImplicitParam(name = "gmtModified", value = "创建时间", required = false, dataType = "LocalDateTime"),
             @ApiImplicitParam(name = "categories", value = "文章分类", required = true, dataType = "List<CategoryDto>"),

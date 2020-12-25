@@ -51,6 +51,13 @@ public class PostService {
         postMapper.insertSelective(post);
         detailedPostDto.setId(post.getId());
 
+        //增加body信息
+        BodyDto bodyDto = detailedPostDto.getBody();
+        Body body = new Body();
+        body.setContent(bodyDto.getContent());
+        body.setPostId(post.getId());
+        bodyMapper.insertSelective(body);
+
         //增加postCategory信息
         List<CategoryDto> categories = detailedPostDto.getCategories();
         for (CategoryDto categoryDto:categories
@@ -119,6 +126,13 @@ public class PostService {
         post.setImgUrl(detailedPostDto.getImgUrl());
         post.setGmtCreate(detailedPostDto.getGmtCreate());
         postMapper.updateByPrimaryKeySelective(post);
+
+        //修改body信息
+        BodyDto bodyDto = detailedPostDto.getBody();
+        Body body = new Body();
+        body.setContent(bodyDto.getContent());
+        body.setPostId(post.getId());
+        bodyMapper.updateByPrimaryKeySelective(body);
 
          //获取新的Category信息,这时候只有名字信息
          List<CategoryDto> categories = detailedPostDto.getCategories();
