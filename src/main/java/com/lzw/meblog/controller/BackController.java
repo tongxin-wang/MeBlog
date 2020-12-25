@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 /**
  * @program: meblog
  * @author: LJ TongxinWang
- * @create: 2020-12-18 19:24
+ * @create: 2020-12-08 19:24
  **/
 @RestController
 @CrossOrigin
@@ -37,7 +37,7 @@ public class BackController {
     * @Description: 后台登陆操作
     * @Param:
     * @author: LJ
-    * @Date: 2020/12/18
+    * @Date: 2020/12/08
     **/
     @ApiOperation(value = "登录")
     @ApiImplicitParams({
@@ -72,7 +72,7 @@ public class BackController {
     * @Description: 增加一篇文章
     * @Param:
     * @author: LJ
-    * @Date: 2020/12/18
+    * @Date: 2020/12/08
     **/
     @ApiOperation(value = "增加一篇文章")
     @ApiImplicitParams({
@@ -96,7 +96,7 @@ public class BackController {
     * @Description: 删除一篇文章
     * @Param: id
     * @author: LJ
-    * @Date: 2020/12/20
+    * @Date: 2020/12/10
     **/
     @ApiOperation(value = "删除一篇文章")
     @ApiImplicitParam(name = "id", value = "文章ID", required = true, dataType = "Integer")
@@ -110,7 +110,7 @@ public class BackController {
     * @Description: 更新一篇文章
     * @Param: detailedPostDto
     * @author: LJ
-    * @Date: 2020/12/20
+    * @Date: 2020/12/10
     **/
     @ApiOperation(value = "更新一篇文章")
     @ApiImplicitParams({
@@ -134,12 +134,12 @@ public class BackController {
     * @Description: 更新一篇文章的分类
     * @Param: post_id, category_id
     * @author: LJ
-    * @Date: 2020/12/21
+    * @Date: 2020/12/11
     **/
     @ApiOperation(value = "更新一篇文章的分类")
     @PutMapping("/postCategory/{post_id}/{category_id}")
-    public String updatePostCategory(@PathVariable int post_id, @PathVariable int category_id){
-        postService.updatePostCategory(post_id, category_id);
+    public String updatePostCategory(@PathVariable int post_id, @PathVariable String category_name){
+        postService.updatePostCategory(post_id, category_name);
         return "修改文章分类成功";
     }
 
@@ -147,7 +147,7 @@ public class BackController {
     * @Description: 添加一条分类
     * @Param: categoryDto
     * @author: LJ
-    * @Date: 2020/12/21
+    * @Date: 2020/12/11
     **/
     @ApiOperation(value = "添加一条分类")
     @ApiImplicitParam(name = "name", value = "分类名称", required = true, dataType = "String")
@@ -161,7 +161,7 @@ public class BackController {
     * @Description: 删除一条分类信息
     * @Param: id
     * @author: LJ
-    * @Date: 2020/12/21
+    * @Date: 2020/12/11
     **/
     @ApiOperation(value = "删除一条分类")
     @ApiImplicitParam(name = "id", value = "分类ID", required = true, dataType = "Integer")
@@ -175,7 +175,7 @@ public class BackController {
     * @Description: 更新一条分类信息
     * @Param:
     * @author: LJ
-    * @Date: 2020/12/21
+    * @Date: 2020/12/11
     **/
     @ApiOperation(value = "更新一条分类信息")
     @ApiImplicitParams({
@@ -192,7 +192,7 @@ public class BackController {
     * @Description: 新增一条标签
     * @Param: tagDto
     * @author: LJ
-    * @Date: 2020/12/21
+    * @Date: 2020/12/11
     **/
     @ApiOperation(value = "新增一条标签")
     @ApiImplicitParam(name = "name", value = "标签名称", required = true, dataType = "String")
@@ -206,7 +206,7 @@ public class BackController {
     * @Description: 删除一条标签
     * @Param: id
     * @author: LJ
-    * @Date: 2020/12/21
+    * @Date: 2020/12/11
     **/
     @ApiOperation(value = "删除一条标签")
     @ApiImplicitParam(name = "id", value = "标签ID", required = true, dataType = "Integer")
@@ -220,7 +220,7 @@ public class BackController {
     * @Description: 更新一条标签
     * @Param: tagDto
     * @author: LJ
-    * @Date: 2020/12/21
+    * @Date: 2020/12/11
     **/
     @ApiOperation(value = "更新一条标签信息")
     @ApiImplicitParams({

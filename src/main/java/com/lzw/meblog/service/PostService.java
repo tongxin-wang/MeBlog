@@ -21,6 +21,8 @@ public class PostService {
     private PostTagMapper postTagMapper;
     @Autowired
     private CategoryMapper categoryMapper;
+    @Autowired
+    private TagMapper tagMapper;
 
 
     public DetailedPostDto getDetailedPostById(int id){
@@ -35,7 +37,7 @@ public class PostService {
     * @Description: 增加一篇文章
     * @Param: detailedPostDto
     * @author: LJ
-    * @Date: 2020/12/18
+    * @Date: 2020/12/08
     **/
     public void addPost(DetailedPostDto detailedPostDto){
         //增加post
@@ -80,7 +82,7 @@ public class PostService {
     * @Description: 删除一篇文章
     * @Param: id
     * @author: LJ
-    * @Date: 2020/12/19
+    * @Date: 2020/12/09
     **/
     public void DeletePost(int id){
         //从post中删除,级联删除
@@ -90,7 +92,7 @@ public class PostService {
     * @Description: 更新文章信息
     * @Param: detailedPostDto
     * @author: LJ
-    * @Date: 2020/12/19
+    * @Date: 2020/12/09
     **/
     public String updatePost(DetailedPostDto detailedPostDto){
         //更新post中的信息
@@ -110,12 +112,9 @@ public class PostService {
          for (CategoryDto categoryDto:categories) {
             PostCategory postCategory = new PostCategory();
             //获取Category_id
-            postCategory.setCategoryId(categoryMapper.selectIfExist(categoryDto.getName()).getId());
+            postCategory.setCategoryId(categoryDto.getId());
             postCategory.setPostId(detailedPostDto.getId());
-            postCategory.setGmtCreate(detailedPostDto.getGmtCreate());
-            postCategory.setGmtModified(detailedPostDto.getGmtModified());
-            //id呢？自增
-            postCategoryMapper.insertSelective(postCategory);
+            postCategoryMapper.updateByPrimaryKeySelective(postCategory);
          }
 
         //获取新的Category信息
@@ -125,11 +124,9 @@ public class PostService {
         //添加新的Category信息
          for (TagDto tagDto:tagDtos) {
             PostTag postTag = new PostTag();
+            //获取tag_id
             postTag.setTagId(tagDto.getId());
             postTag.setPostId(detailedPostDto.getId());
-            postTag.setGmtCreate(detailedPostDto.getGmtCreate());
-            postTag.setGmtModified(detailedPostDto.getGmtModified());
-            //id呢？自增
             postTagMapper.insertSelective(postTag);
          }
         return "进行更新操作";
@@ -139,27 +136,31 @@ public class PostService {
     * @Description: 更新一篇文章的分类
     * @Param: post_id, category_id
     * @author: LJ
-    * @Date: 2020/12/21
+    * @Date: 2020/12/11
     **/
-    public void updatePostCategory(int post_id, int category_id){
-        PostCategory postCategory;
-        postCategory = postCategoryMapper.selectByPostId(post_id);
+    public void updatePostCategory(int post_id, String name){
+        Category category;
+        category = categoryMapper.selectIfExist(name);
         //更新分类id信息
-        postCategory.setCategoryId(category_id);
+        PostCategory postCategory = new PostCategory();
+        postCategory.setPostId(post_id);
+        postCategory.setId(category.getId());
         postCategoryMapper.updateByPrimaryKeySelective(postCategory);
     }
+
 
     /**
     * @Description: 更新一篇文章的标签信息
     * @Param: post_id, tag_id
     * @author: LJ
-    * @Date: 2020/12/24
+    * @Date: 2020/12/14
     **/
-    public void updateTag(int post_id, int tag_id){
+    public void updateTag(int post_id, String name){
         PostTag postTag;
+        Tag tag = tagMapper.selectIfExist(name);
         postTag = postTagMapper.selectByPostId(post_id);
         //更新标签id信息
-        postTag.setTagId(tag_id);
+        postTag.setTagId(tag.getId());
         postTagMapper.updateByPrimaryKeySelective(postTag);
     }
 

@@ -27,7 +27,7 @@ public class CategoryService {
     * @Description: 增加分类信息
     * @Param: name
     * @author: LJ
-    * @Date: 2020/12/21
+    * @Date: 2020/12/11
     **/
     public Category addCategory(CategoryDto categoryDto){
         //首先检查该分类是否已经存在
@@ -54,7 +54,7 @@ public class CategoryService {
     * @Description: 删除分类信息
     * @Param: id
     * @author: LJ
-    * @Date: 2020/12/21
+    * @Date: 2020/12/11
     **/
     public void deleteCategory(int id){
         //级联删除
@@ -65,7 +65,7 @@ public class CategoryService {
     * @Description: 更新分类名称
     * @Param: name
     * @author: LJ
-    * @Date: 2020/12/21
+    * @Date: 2020/12/11
     **/
     public void updateCategory(CategoryDto categoryDto){
         //级联更新
