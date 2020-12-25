@@ -129,10 +129,20 @@ public class PostService {
 
         //修改body信息
         BodyDto bodyDto = detailedPostDto.getBody();
-        Body body = new Body();
-        body.setContent(bodyDto.getContent());
-        body.setPostId(post.getId());
-        bodyMapper.updateByPostIdSelective(body);
+        Body body = bodyMapper.selectByPostId(detailedPostDto.getId());
+        if (body==null)
+        {
+            body = new Body();
+            body.setContent(bodyDto.getContent());
+            body.setPostId(post.getId());
+            bodyMapper.insertSelective(body);
+        }
+        else {
+            body.setContent(bodyDto.getContent());
+            body.setPostId(post.getId());
+            bodyMapper.updateByPostIdSelective(body);
+        }
+
 
          //获取新的Category信息,这时候只有名字信息
          List<CategoryDto> categories = detailedPostDto.getCategories();

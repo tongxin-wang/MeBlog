@@ -11,4 +11,6 @@ public interface PostCategoryMapper extends MyBatisBaseDao<PostCategory, Integer
     public PostCategory selectByPostId(int post_id);
 
     public void deleteByPostId(int post_id);
+
+    public int updateByPostId(PostCategory postCategory);
 }
