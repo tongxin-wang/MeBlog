@@ -26,7 +26,7 @@ public class TagService {
     /**
     * @Description: 添加新的标签
     * @Param: tagDto
-    * @author: LJ
+    * @author: ZH
     * @Date: 2020/12/11
     **/
     public boolean addTag(TagDto tagDto){
@@ -51,7 +51,7 @@ public class TagService {
     /**
     * @Description: 删除一条标签
     * @Param: id
-    * @author: LJ
+    * @author: ZH
     * @Date: 2020/12/11
     **/
     public boolean deleteTag(int id){
@@ -64,11 +64,11 @@ public class TagService {
     /**
     * @Description: 更新标签信息
     * @Param: tagDto
-    * @author: LJ
+    * @author: ZH
     * @Date: 2020/12/11
     **/
     public boolean updateTag(TagDto tagDto){
-        //级联更新
+
         Tag tag = new Tag();
         tag.setId(tagDto.getId());
         tag.setName(tagDto.getName());

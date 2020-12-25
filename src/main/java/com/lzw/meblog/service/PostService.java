@@ -66,6 +66,10 @@ public class PostService {
         List<TagDto> tagDtos = detailedPostDto.getTags();
         addPostTag(tagDtos, detailedPostDto);
 
+        if (detailedPostDto.getTitle()==null||detailedPostDto.getBody()==null)
+        {
+            return false;
+        }
         return true;
     }
 
@@ -129,7 +133,11 @@ public class PostService {
     **/
     public boolean DeletePost(int id){
         //从post中删除,级联删除
-        postMapper.deleteByPrimaryKey(id);
+        int count = postMapper.deleteByPrimaryKey(id);
+        if (count<=0)
+        {
+            return false;
+        }
         return true;
     }
     /**
@@ -147,7 +155,6 @@ public class PostService {
         post.setImgUrl(detailedPostDto.getImgUrl());
         post.setGmtCreate(detailedPostDto.getGmtCreate());
         postMapper.updateByPrimaryKeySelective(post);
-
         //修改body信息
         BodyDto bodyDto = detailedPostDto.getBody();
         Body body = bodyMapper.selectByPostId(detailedPostDto.getId());
@@ -163,13 +170,14 @@ public class PostService {
             body.setPostId(post.getId());
             bodyMapper.updateByPostIdSelective(body);
         }
-
         //更新Post的Category信息
         updatePostCategory(detailedPostDto);
-
         //更新Post的Tag信息
         updateTag(detailedPostDto);
-
+        if (detailedPostDto.getTitle()==null||detailedPostDto.getBody()==null)
+        {
+            return false;
+        }
         return true;
     }
 

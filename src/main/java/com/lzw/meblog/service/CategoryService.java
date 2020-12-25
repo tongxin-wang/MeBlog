@@ -69,7 +69,7 @@ public class CategoryService {
     * @Date: 2020/12/11
     **/
     public boolean updateCategory(CategoryDto categoryDto){
-        //级联更新
+
         Category category = new Category();
         category.setId(categoryDto.getId());
         category.setName(categoryDto.getName());
