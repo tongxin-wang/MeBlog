@@ -132,7 +132,7 @@ public class PostService {
         Body body = new Body();
         body.setContent(bodyDto.getContent());
         body.setPostId(post.getId());
-        bodyMapper.updateByPrimaryKeySelective(body);
+        bodyMapper.updateByPostIdSelective(body);
 
          //获取新的Category信息,这时候只有名字信息
          List<CategoryDto> categories = detailedPostDto.getCategories();

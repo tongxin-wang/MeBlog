@@ -8,4 +8,6 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface BodyMapper extends MyBatisBaseDao<Body, Integer> {
+
+    public int updateByPostIdSelective(Body body);
 }

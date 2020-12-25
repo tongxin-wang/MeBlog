@@ -83,6 +83,26 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <update id="updateByPostIdSelective" parameterType="com.lzw.meblog.model.Body">
+    update body
+    <set>
+      <if test="gmtCreate != null">
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null">
+        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="postId != null">
+        post_id = #{postId,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where post_id = #{postId,jdbcType=INTEGER}
+  </update>
+
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.lzw.meblog.model.Body">
     update body
     set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
